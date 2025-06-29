@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
+import cloudinary from "../lib/cloudinary.js";
 
 export const getUsers = async (req, res) => {
     try {
@@ -61,7 +62,7 @@ export const sendMessages = async (req, res) => {
 
         await newMessage.save();
 
-        if (!newMessage || newMessage.trim() === "") {
+        if ((!text || text.trim() === "") && !imageUrl) {
             return res.status(400).json({
                 message: "Message cannot be empty."
             });
