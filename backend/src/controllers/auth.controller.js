@@ -82,6 +82,7 @@ export const login = async (req, res) => {
 
         // generate jwt token here
         generateToken(existingUser._id, res);
+        console.log("User logged in:", existingUser.email);
 
         res.status(200).json({
             _id: existingUser._id,
@@ -107,6 +108,7 @@ export const logout = (req, res) => {
             maxAge: 0,
         });
         
+        console.log("User logged out");
         return res.status(200).json({
             message: "Logout successful."
         })
